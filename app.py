@@ -1,9 +1,11 @@
 import streamlit as st
 
+
 st.markdown("# AI 챗봇 만들기")
 st.markdown("---")
 st.markdown("## 질문을 하시면 AI 친구가 응답합니다.")
 st.header("1. 기본 정보 입력")
+
 user_id = st.text_input("아이디(ID)를 입력하세요", placeholder="example_user")
 age = st.number_input("나이를 입력하세요", min_value=1, max_value=100, value=17)
 question = st.text_area("AI에게 보낼 질문을 입력하세요", placeholder="여기에 질문을 작성해 주세요.")
@@ -13,7 +15,7 @@ ai_model = st.radio("사용할 AI 모델을 선택하세요", ["GPT-4", "Claude 
 tone = st.selectbox("답변의 말투를 골라주세요", ["친절하게", "냉철하게", "유머러스하게"])
 features = st.multiselect("추가 기능을 선택하세요", ["이미지 생성", "웹 검색", "코드 분석", "번역"])
 creativity = st.slider("AI의 창의성 수준을 설정하세요", 0, 100, 50)
-ai_speed = st.select_slider("응답 처리 속도를 선택하세요",options=["매우 느림", "느림", "보통", "빠름", "실시간"],value="보통")
+ai_speed = st.select_slider("응답 처리 속도를 선택하세요", options=["매우 느림", "느림", "보통", "빠름", "실시간"], value="보통")
 agree = st.checkbox("개인정보 수집 및 AI 학습 이용에 동의합니다.")
 st.markdown("---")
 
@@ -34,14 +36,26 @@ if st.button("질문 전송하기"):
 
 
 
-
-
 st.markdown("# 앱UI 만들기")
-user_id = st.text_input("이름를 입력하세요", placeholder="example_user")
-ai_model = st.radio("학년", ["1", "2", "3"], horizontal=True)
-tone = st.selectbox("반", ["1", "2", "3"])
-creativity = st.slider("난이도", 0, 100, 50)
-ai_speed = st.select_slider("난이도",options=["하", "중", "상"],value="중")
 
-question = st.text_area("소감", placeholder="여기에 작성해 주세요.")
-if st.button("확인"):
+
+ui_name = st.text_input("이름을 입력하세요", placeholder="홍길동", key="ui_name_input")
+ui_grade = st.radio("학년", ["1", "2", "3"], horizontal=True, key="ui_grade_radio")
+ui_class = st.selectbox("반", ["1", "2", "3"], key="ui_class_select")
+ui_level_slider = st.slider("난이도 (숫자)", 0, 100, 50, key="ui_level_slider")
+ui_level_text = st.select_slider("난이도 (상중하)", options=["하", "중", "상"], value="중", key="ui_level_select")
+ui_review = st.text_area("소감", placeholder="여기에 작성해 주세요.", key="ui_review_textarea")
+
+
+ui_agree = st.checkbox("제출 정보가 정확함을 확인합니다.", key="ui_agree_checkbox")
+
+if st.button("확인", key="ui_submit_button"):
+    if ui_agree:
+        st.success(f"성공적으로 제출되었습니다! ({ui_name}님)")
+        st.markdown(f"""
+        * **학년/반:** `{ui_grade}학년 {ui_class}반`
+        * **난이도 수준:** `{ui_level_text}` (상세 점수: `{ui_level_slider}%`)
+        * **작성한 소감:** {ui_review}
+        """)
+    else:
+        st.error("⚠️ 확인 동의 항목에 체크해야 제출이 가능합니다.")
