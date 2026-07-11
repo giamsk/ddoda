@@ -1,9 +1,11 @@
 import streamlit as st
 st.title("카운트")
-count = 0
+
+if 'count' not in st.session_state.count:
+    st.session_state.count=0
 if st.button("증가"):
-    count = count+1
-st.markdown(f"## 현제숫자: '(count)'")
+    st.session_state.count+=1
+st.markdown(f"## 현제숫자: '{st.session_state.count}'")
 
 
 
