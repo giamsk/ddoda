@@ -31,3 +31,17 @@ if st.button("질문 전송하기"):
             st.info("참고: 14세 미만 사용자이므로 보호자 모드가 활성화됩니다.")
     else:
         st.error("⚠️ 동의 항목에 체크해야 전송이 가능합니다.")
+
+
+
+
+
+st.markdown("# 앱UI 만들기")
+user_id = st.text_input("이름를 입력하세요", placeholder="example_user")
+ai_model = st.radio("학년", ["1", "2", "3"], horizontal=True)
+tone = st.selectbox("반", ["1", "2", "3"])
+creativity = st.slider("난이도", 0, 100, 50)
+ai_speed = st.select_slider("난이도",options=["하", "중", 상",],value="보통")
+
+question = st.text_area("소감", placeholder="여기에 작성해 주세요.")
+if st.button("확인"):
