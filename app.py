@@ -137,19 +137,16 @@ if st.button("코디 완성하기"):
             st.write("전문가가 제안하는 코디 연출법을 참고해 보세요.")
 
 
+
 def reset_all():
-    st.ssion_state.a=""
+    
+    st.session_state.a = ""
+    
+    # selectbox, radio 
+    st.session_state.s = "맑음"        
+    st.session_state.d = "후드티"      
+    st.session_state.g = "스니커즈"    
+    st.session_state.f = "청바지"      
+    st.session_state.h = []          
 
-    st.ssion_state.s = ""
-
-    st.ssion_state.d = ""
-
-    st.ssion_state.f = ""
-
-    st.ssion_state.g = ""
-
-    st.ssion_state.h = ""
-
-
-
-st.button(지우기,on_click=reset_all)
+st.button("지우기", on_click=reset_all)
